@@ -20,6 +20,7 @@ export class PreviewComponent implements OnInit {
 
   ngOnInit(): void {
     this.articleService.getCurrentArticle().subscribe(res => {
+      console.log(res);
       this.article = res;
     })
   }
