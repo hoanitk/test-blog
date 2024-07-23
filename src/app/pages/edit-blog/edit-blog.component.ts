@@ -8,7 +8,12 @@ import { ArticleModel } from '../../models/article.model';
   styleUrl: './edit-blog.component.css',
 })
 export class EditBlogComponent {
-  article: ArticleModel = {};
+  article: ArticleModel = {
+    title: '',
+    content: '',
+    created: new Date(),
+    public: false
+  };
   editorContent: string = '';
   title = '';
 
@@ -19,5 +24,9 @@ export class EditBlogComponent {
 
   saveJsonArticle(): void {
     this.articleService.addNewArticle(this.title, this.editorContent);
+  }
+
+  publicArticle() {
+    this.articleService.publicArticle();
   }
 }

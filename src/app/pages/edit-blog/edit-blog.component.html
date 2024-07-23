@@ -1,7 +1,10 @@
 <div class="container">
-  <!-- <quill-editor [modules]="titleModules" [theme]="'custom'" [(ngModel)]="article.title" (onContentChanged)="saveJsonArticle()">
-        </quill-editor>
-        <quill-editor [modules]="contentQuillModules" [(ngModel)]="article.contents" (onContentChanged)="saveJsonArticle()">
-        </quill-editor> -->
-  <app-custom-editor [(editorContent)]="editorContent" [(editorTitle)]="title" (onChange)="saveJsonArticle()"></app-custom-editor>
+    <div class="left">
+        <ul class="menu">
+            <li>{{title ? title : 'undefined'}} <button (click)="publicArticle()">public</button></li>
+        </ul>
+    </div>
+    <div class="right">
+        <app-custom-editor [(editorContent)]="editorContent" [(editorTitle)]="title" (onChange)="saveJsonArticle()"></app-custom-editor>
+    </div>
 </div>
