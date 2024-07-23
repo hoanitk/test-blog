@@ -1,0 +1,33 @@
+.view-edit {
+    display: flex;
+    min-height: 100vh;
+}
+
+.left {
+    width: 300px;
+    background-color: #2e2d350a;
+}
+
+.right {
+    width: calc(100% - 330px);
+    margin-left: auto;
+}
+
+.menu {
+    display: block;
+    padding: 0;
+    margin-top: 15px;
+}
+
+.menu li {
+    display: block;
+    padding: 5px 15px;
+}
+
+.menu li:hover {
+    background-color: #2e2d3523;
+}
+
+.menu li.active {
+    background-color: #2e2d3523;
+}

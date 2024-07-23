@@ -1,0 +1,18 @@
+<div class="editor-wapper">
+    <quill-editor #editor
+    [theme]="'bubble'"
+    [modules]="mediaOnlyModules"
+    [(ngModel)]="editorContent"
+    (onContentChanged)="onContentChanged($event)"
+    (onSelectionChanged)="selectionChange($event)"
+    (onEditorCreated)="onEditorCreated($event)"
+  >
+  </quill-editor>
+  <div id ="{{id}}" class="plus-button">
+    <button class="button">+</button>
+  </div>
+  <ul class="menu-toolt">
+    <li><button class="button" (click)="uploadImg(editor)"><svg fill="#000000" height="18px" width="18px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 455 455" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M0,0v455h455V0H0z M259.405,80c17.949,0,32.5,14.551,32.5,32.5s-14.551,32.5-32.5,32.5s-32.5-14.551-32.5-32.5 S241.456,80,259.405,80z M375,375H80v-65.556l83.142-87.725l96.263,68.792l69.233-40.271L375,299.158V375z"></path> </g></svg></button></li>
+    <li><button class="button" (click)="uploadVideo(editor)"><svg fill="#000000" height="18px" width="18px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 490.718 490.718" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M245.359,0.359C109.852,0.359,0,110.049,0,245.358s109.852,245,245.359,245s245.359-109.691,245.359-245 S380.866,0.359,245.359,0.359z M176.828,341.011V140.824l187.489,100.098L176.828,341.011z"></path> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> </g> </g></svg></button></li>
+</ul>
+</div>

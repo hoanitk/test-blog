@@ -1,0 +1,8 @@
+<div class="container">
+  <h1 class="title">{{ article.title }}</h1>
+  <div class="content">
+    @for (content of article.contents; track $index) {
+    <div class="text" [innerHTML]="content.content"></div>
+    }
+  </div>
+</div>
