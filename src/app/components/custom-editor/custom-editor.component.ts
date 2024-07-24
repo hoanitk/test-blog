@@ -60,17 +60,19 @@ export class CustomEditorComponent implements OnInit{
     });
     if (event.source === 'user') {
       document.querySelectorAll('.image-container input').forEach((input: any) => {
-        input.addEventListener('input', function() {
-          const imageBlot = input.closest('.image-container');
-          if (imageBlot) {
-            const caption = imageBlot.querySelector('small');
-            if(caption) {
-              caption.innerHTML = input.value;
-            } else {
-              const captionNew = document.createElement('small');
-              captionNew.classList.add('caption')
-              captionNew.innerHTML = input.value;
-              imageBlot.appendChild(captionNew);
+        input.addEventListener('keydown', function(event: any) {
+          if(event.key === 'Enter') {
+            const imageBlot = input.closest('.image-container');
+            if (imageBlot) {
+              const caption = imageBlot.querySelector('small');
+              if(caption) {
+                caption.innerHTML = input.value;
+              } else {
+                const captionNew = document.createElement('small');
+                captionNew.classList.add('caption')
+                captionNew.innerHTML = input.value;
+                imageBlot.appendChild(captionNew);
+              }
             }
           }
         });
