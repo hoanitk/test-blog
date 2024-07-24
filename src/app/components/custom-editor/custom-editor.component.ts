@@ -169,14 +169,15 @@ export class CustomEditorComponent implements OnInit{
       if (
         leaf &&
         leaf.domNode &&
-        leaf.domNode.tagName?.toLowerCase() === 'img'
+        leaf.domNode.className.includes('image-container')
       ) {
+        const img = leaf.domNode.querySelector('img')
         if (value === 'small') {
-          leaf.domNode.setAttribute('style', 'width: 200px');
+          img.setAttribute('style', 'width: 200px');
         } else if (value === 'large') {
-          leaf.domNode.setAttribute('style', 'width: 400px');
+          img.setAttribute('style', 'width: 400px');
         } else if (value === 'huge') {
-          leaf.domNode.setAttribute('style', 'width: 100%');
+          img.setAttribute('style', 'width: 100%');
         }
       }
     }
