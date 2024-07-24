@@ -1,19 +1,19 @@
-import { Component, HostListener, model, output } from '@angular/core';
-import { MediaOnlyModules } from '../../../consts/editor-config';
+import { Component, HostListener, model, OnInit, output } from '@angular/core';
+
 import {
   ContentChange,
   QuillEditorComponent,
   QuillModules,
   SelectionChange,
 } from 'ngx-quill';
-import Quill from 'quill/core';
+import Quill, { Parchment } from 'quill/core';
 
 @Component({
   selector: 'app-custom-editor',
   templateUrl: './custom-editor.component.html',
   styleUrl: './custom-editor.component.css',
 })
-export class CustomEditorComponent {
+export class CustomEditorComponent implements OnInit{
   mediaOnlyModules: QuillModules = {
     toolbar: {
       container: [[{ size: ['small', 'large', 'huge'] }]],
@@ -30,13 +30,15 @@ export class CustomEditorComponent {
 
   constructor() {}
 
+  ngOnInit(): void {
+  }
+
   onContentChanged(event: ContentChange) {
     const editor = event.editor;
     const lines = editor.getLines();
     if (lines.length > 0 && lines[0].domNode.tagName !== 'H1') {
       editor.formatLine(0, 1, { header: 1 });
     }
-
     if (lines.length > 0) {
       this.editorTitle.set(lines[0].domNode.innerHTML);
     }
@@ -56,7 +58,25 @@ export class CustomEditorComponent {
         lineDom.classList.add('content-line');
       }
     });
-    this.onChange.emit(event)
+    if (event.source === 'user') {
+      document.querySelectorAll('.image-container input').forEach((input: any) => {
+        input.addEventListener('input', function() {
+          const imageBlot = input.closest('.image-container');
+          if (imageBlot) {
+            const caption = imageBlot.querySelector('small');
+            if(caption) {
+              caption.innerHTML = input.value;
+            } else {
+              const captionNew = document.createElement('small');
+              captionNew.classList.add('caption')
+              captionNew.innerHTML = input.value;
+              imageBlot.appendChild(captionNew);
+            }
+          }
+        });
+      });
+    }
+    this.onChange.emit(event);
     editor.focus;
   }
 
@@ -73,18 +93,7 @@ export class CustomEditorComponent {
   }
 
   onEditorCreated(editor: any) {
-    const editorContainer = editor.container;
     this.editor = editor;
-    editorContainer.addEventListener('drop', (event: any) => {
-      event.preventDefault();
-      const files = event.dataTransfer.files;
-      if (files.length > 0) {
-        this.uploadImage(files[0], editorContainer);
-      }
-    });
-    editorContainer.addEventListener('dragover', (event: any) => {
-      event.preventDefault();
-    });
   }
 
   uploadImage(file: File, editor: any) {
@@ -120,7 +129,7 @@ export class CustomEditorComponent {
         reader.onload = () => {
           quillEditor.insertEmbed(
             range.index,
-            'image',
+            'imageBlot',
             reader.result,
             Quill.sources.USER
           );
@@ -158,7 +167,7 @@ export class CustomEditorComponent {
       if (
         leaf &&
         leaf.domNode &&
-        leaf.domNode.tagName.toLowerCase() === 'img'
+        leaf.domNode.tagName?.toLowerCase() === 'img'
       ) {
         if (value === 'small') {
           leaf.domNode.setAttribute('style', 'width: 200px');

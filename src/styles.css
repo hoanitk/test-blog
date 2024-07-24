@@ -66,3 +66,12 @@ img {
 .ql-editor img[style*="width: 100%"] {
     width: 100% !important;
 }
+
+.ql-editor .image-container input{
+    width: 100%;
+}
+
+.ql-editor .image-container .caption{
+    display: none;
+}
+
